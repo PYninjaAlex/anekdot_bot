@@ -7,7 +7,7 @@ URL = 'https://www.anekdot.ru/release/anekdot/year/'
 
 def parser(url):
     r = requests.get(url)
-    soup =b(r.text, 'html.parser')
+    soup = b(r.text, 'html.parser')
     anekdots = soup.find_all('div', class_='text')
     return [c.text for c in anekdots]
 
