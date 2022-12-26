@@ -7,10 +7,9 @@ import os
 
 load_dotenv()
 
-
-
 URL = 'https://www.anekdot.ru/release/anekdot/year/'
 TOKEN = os.getenv("TOKEN")
+
 def parser(url):
     r = requests.get(url)
     soup = b(r.text, 'html.parser')
