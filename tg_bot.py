@@ -2,19 +2,25 @@ import requests
 import random
 import telebot
 from bs4 import BeautifulSoup as b
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+
 
 URL = 'https://www.anekdot.ru/release/anekdot/year/'
-API_KEY ='5757402198:AAFfNElHefmKsvvDKfIZ6bhDV_yjjeUifjE'
+TOKEN = os.getenv("TOKEN")
 def parser(url):
     r = requests.get(url)
-    soup =b(r.text, 'html.parser')
+    soup = b(r.text, 'html.parser')
     anekdots = soup.find_all('div', class_='text')
     return [c.text for c in anekdots]
 
 lists_of_jokes = parser(URL)
 random.shuffle(lists_of_jokes)
 
-bot = telebot.TeleBot(API_KEY)
+bot = telebot.TeleBot(TOKEN)
 @bot.message_handler(commands =['начать'])
 
 def hello(message):
